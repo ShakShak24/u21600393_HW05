@@ -27,7 +27,7 @@
             </select>
         </div>
         <div class="col">
-            <input type="submit" name="Search" value="submit" />
+            
             <button type="submit" class="btn btn-success btn-block" name="Search">Search</button>
 
         </div>
@@ -59,6 +59,7 @@
             <td>@book.pageCount</td>
             <td>@book.Point</td>
             <td>
+                Available
             </td>
             <td>
                 @Html.ActionLink("View", "Borrows", "Home", new { bookId = book.BookID }, new { @class = "btn btn-primary" })
