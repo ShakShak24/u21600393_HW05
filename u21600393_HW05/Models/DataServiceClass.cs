@@ -128,10 +128,9 @@ namespace u21600393_HW05.Models
                                 StudentID = Convert.ToInt32(reader["studentId"]),
                                 Name = Convert.ToString(reader["name"]),
                                 Surname = Convert.ToString(reader["surname"]),
-                                Birthdate = Convert.ToDateTime(reader["birthdate"]),
-                                Gender = Convert.ToString(reader["gender"]),
-                                Class = Convert.ToString(reader["class"])
-                                
+                                Class = Convert.ToString(reader["class"]),
+                                Point = Convert.ToInt32(reader["point"])
+
 
                             };
                             Student.Add(stu);
@@ -172,6 +171,49 @@ namespace u21600393_HW05.Models
                 con.Close();
             }
             return Borrowed;
+        }
+
+        //public List<Borrowed> getCount(int ID)
+        //{
+
+        //}
+
+        //public Books searchbook(int bookId)
+        //{
+        //    List<Books> name = new List<Books>();
+        //    return name.Where(x => x.BookID = bookId).FirsthOrDefault();
+
+        //}
+
+        public List<Books> SearchByName(string name)
+        {
+            List<Books> SBooks = new List<Books>();
+            using (SqlConnection con = new SqlConnection(ConnectionString))
+            {
+                con.Open();
+                using (SqlCommand cmd = new SqlCommand("Select * from books where name like '%" + name + "%", con))
+                {
+                    using (SqlDataReader reader = cmd.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            Books sb = new Books
+                            {
+                                BookID = Convert.ToInt32(reader["bookId"]),
+                                Name = Convert.ToString(reader["name"]),
+                                pageCount = Convert.ToInt32(reader["pagecount"]),
+                                Point = Convert.ToInt32(reader["point"]),
+                                AuthorID = Convert.ToInt32(reader["authorId"]),
+                                typeID = Convert.ToInt32(reader["typeId"])
+
+                            };
+                            SBooks.Add(sb);
+                        }
+                    }
+                }
+                con.Close();
+            }
+            return SBooks;
         }
     }
 }

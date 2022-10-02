@@ -6,6 +6,31 @@
 
 <h2>Students</h2>
 
+<form>
+    <div class="form-row">
+        <div class="col">
+            <input type="search" id="searchStudentName" class="form-control" placeholder="Search Student Name">
+        </div>
+        <div class="col">
+            <select id="dropType" class="form-control">
+                <option value="" selected disabled>Select a class</option>
+                @foreach (var item in Model)
+                {
+                    <option>@Html.DisplayFor(modelItem => item.Class)</option>
+                }
+            </select>
+        </div>
+        <div class="col">
+            <button type="button" class="btn btn-success btn-block">Search</button>
+
+        </div>
+        <div class="col">
+            <button type="button" class="btn btn-danger btn-block">Clear</button>
+        </div>
+    </div>
+</form>
+
+<br />
 
 <table class="table">
     <tr>
@@ -47,9 +72,8 @@
             @Html.DisplayFor(modelItem => item.Point)
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-            @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-            @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+            @Html.ActionLink("Borrow Book", "Edit", new { /* id=item.PrimaryKey */ }) |
+            
         </td>
     </tr>
 }

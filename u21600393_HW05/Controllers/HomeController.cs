@@ -22,11 +22,19 @@ namespace u21600393_HW05.Controllers
 
         }
 
+        public ActionResult SearchBookName(string book)
+
         public ActionResult Borrows(int bookId)
         {
             List<Borrowed> borrows = dataService.GetBorroweds(bookId);
             return View(borrows);
         }
+
+        //public ActionResult getCount(int bookId)
+        //{
+        //    List<Borrowed> count = dataService.getCount(bookId);
+        //    return RedirectToAction("Borrows");
+        //}
 
         public ActionResult Students()
         {
