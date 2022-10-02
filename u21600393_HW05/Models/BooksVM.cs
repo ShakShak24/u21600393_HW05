@@ -12,12 +12,8 @@ namespace u21600393_HW05.Models
 
         public List<Borrows> Borrows { get; set; }
         public List<Types> Types { get; set; }
-        public List<Students> Students { get; set; } 
+        public List<Students> Students { get; set; }
 
-        //public String getAuthorName(int iD)
-        //{
-        //    List<Authors> name = (List<Authors>)Authors.Where(x => x.authorId == iD).Select(s => s.Name);
-        //    return name.ToString();
-        //}
+        
     }
 }

@@ -130,8 +130,8 @@ namespace u21600393_HW05.Models
                                 Surname = Convert.ToString(reader["surname"]),
                                 Birthdate = Convert.ToDateTime(reader["birthdate"]),
                                 Gender = Convert.ToString(reader["gender"]),
-                                Class = Convert.ToString(reader["class"]),
-                                Point = Convert.ToInt32(reader["point"])
+                                Class = Convert.ToString(reader["class"])
+                                
 
                             };
                             Student.Add(stu);
@@ -143,35 +143,35 @@ namespace u21600393_HW05.Models
             return Student;
         }
 
-        public List<Borrows> GetBorrows()
+
+       public List<Borrowed> GetBorroweds(int bookId)
         {
-            List<Borrows> Borrows = new List<Borrows>();
+            List<Borrowed> Borrowed = new List<Borrowed>();
             using (SqlConnection con = new SqlConnection(ConnectionString))
             {
                 con.Open();
-                using (SqlCommand cmd = new SqlCommand("Select * from borrows", con))
+                using (SqlCommand cmd = new SqlCommand("Select borrowiD, takenDate, broughtDate, students.name + ' ' + students.surname AS 'Borrowed By', books.name From BORROWS INNER JOIN STUDENTS ON BORROWS.STUDENTID = STUDENTS.STUDENTID INNER JOIN books on borrows.bookId = books.bookId WHERE BORROWS.BOOKID = " + bookId, con))
                 {
                     using (SqlDataReader reader = cmd.ExecuteReader())
                     {
                         while (reader.Read())
                         {
-                            Borrows bor = new Borrows
+                            Borrowed brd = new Borrowed
                             {
-                                borrowID = Convert.ToInt32(reader["borrowId"]),
-                                StudentID = Convert.ToInt32(reader["studentId"]),
-                                BookID = Convert.ToInt32(reader["bookId"]),
+                                borrowId = Convert.ToInt32(reader["borrowId"]),
+                                borrowedBy = Convert.ToString(reader["Borrowed By"]),
                                 takenDate = Convert.ToDateTime(reader["takenDate"]),
                                 broughtDate = Convert.ToDateTime(reader["broughtDate"]),
-                                
+                                Name = Convert.ToString(reader["NAME"])
 
                             };
-                            Borrows.Add(bor);
+                            Borrowed.Add(brd);
                         }
                     }
                 }
                 con.Close();
             }
-            return Borrows;
+            return Borrowed;
         }
     }
 }

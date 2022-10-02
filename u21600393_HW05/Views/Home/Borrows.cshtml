@@ -1,24 +1,18 @@
-﻿@model IEnumerable<u21600393_HW05.Models.Borrows>
+﻿@model IEnumerable<u21600393_HW05.Models.Borrowed>
 
 @{
-    ViewBag.Title = "Borrows";
+    ViewBag.Title = "Book Details";
 }
 
-<h2>Borrows</h2>
+<h2>Name</h2>
 
 <p>
-    @Html.ActionLink("Create New", "Create")
+    @Html.ActionLink("View Students", "Students", "Home", new { @class = "btn btn-primary"  })
 </p>
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.borrowID)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.StudentID)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.BookID)
+            @Html.DisplayNameFor(model => model.borrowId)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.takenDate)
@@ -26,19 +20,16 @@
         <th>
             @Html.DisplayNameFor(model => model.broughtDate)
         </th>
+        <th>
+            @Html.DisplayNameFor(model => model.borrowedBy)
+        </th>
         <th></th>
     </tr>
 
 @foreach (var item in Model) {
     <tr>
         <td>
-            @Html.DisplayFor(modelItem => item.borrowID)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.StudentID)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.BookID)
+            @Html.DisplayFor(modelItem => item.borrowId)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.takenDate)
@@ -47,10 +38,9 @@
             @Html.DisplayFor(modelItem => item.broughtDate)
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-            @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-            @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+            @Html.DisplayFor(modelItem => item.borrowedBy)
         </td>
+        
     </tr>
 }
 

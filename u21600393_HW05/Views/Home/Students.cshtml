@@ -1,14 +1,12 @@
 ﻿@model IEnumerable<u21600393_HW05.Models.Students>
 
 @{
-    ViewBag.Title = "Student";
+    ViewBag.Title = "Students";
 }
 
-<h2>Student</h2>
+<h2>Students</h2>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
+
 <table class="table">
     <tr>
         <th>
@@ -20,6 +18,7 @@
         <th>
             @Html.DisplayNameFor(model => model.Surname)
         </th>
+      
         <th>
             @Html.DisplayNameFor(model => model.Class)
         </th>
@@ -40,6 +39,7 @@
         <td>
             @Html.DisplayFor(modelItem => item.Surname)
         </td>
+        
         <td>
             @Html.DisplayFor(modelItem => item.Class)
         </td>

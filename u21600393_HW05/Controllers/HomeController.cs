@@ -16,25 +16,25 @@ namespace u21600393_HW05.Controllers
             BooksVM bookR = new BooksVM();
             bookR.Authors = dataService.GetAuthors();
             bookR.Books = dataService.GetBooks();
+            bookR.Types = dataService.GetTypes();
 
             return View(bookR);
 
         }
 
-        public ActionResult Student()
+        public ActionResult Borrows(int bookId)
         {
-            List<Students> students = dataService.GetStudents();
-            return View(students);
-        }
-
-        public ActionResult Borrows()
-        {
-            List<Borrows> borrows = dataService.GetBorrows();
+            List<Borrowed> borrows = dataService.GetBorroweds(bookId);
             return View(borrows);
         }
-        //List<Books> books = dataService.GetBooks();
-            //return View(books);
 
+        public ActionResult Students()
+        {
+            List<Students> students = dataService.GetStudents();
+
+
+            return View(students);
+        }
 
     }
 }

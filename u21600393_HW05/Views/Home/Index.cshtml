@@ -3,6 +3,26 @@
 
 <div class="h2">Books</div>
 
+<div>
+    <input type="text" id="bookName" name="bookName" placeholder="Search Book Name" />
+    <select name="Type" id="type">
+        @foreach (var type in Model.Types)
+        {
+            <option value="">@type.Name</option>
+        }
+    </select>
+    <select name="Authors" id="authors">
+        @foreach (var authors in Model.Authors)
+        {
+            <option value="">@authors.Name</option>
+        }
+    </select>
+    <button type="button" id="search">Search</button>
+    <button type="reset" id="reset">Clear</button>
+</div>
+
+<br />
+
 <table class="table">
     <tr>
         <th>#</th>
@@ -11,6 +31,7 @@
         <th>Type</th>
         <th>Page Count</th>
         <th>Points</th>
+        <th>Status</th>
     </tr>
     @foreach (var book in Model.Books)
     {
@@ -22,7 +43,11 @@
             <td>@book.pageCount</td>
             <td>@book.Point</td>
             <td>
-                
+                Available
+            </td>
+            <td>
+                @Html.ActionLink("View", "Borrows", "Home", new { bookId = book.BookID}, new { @class = "btn btn-primary" })
+
             </td>
         </tr>
     }
