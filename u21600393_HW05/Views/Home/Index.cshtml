@@ -3,18 +3,19 @@
 
 <div class="h2">Books</div>
 
+@using (Html.BeginForm("searchBooks", "Home", FormMethod.Post))
+{
 <form>
     <div class="form-row">
         <div class="col">
-            <input type="search" id="searchBookName" class="form-control" placeholder="Search Book Name">
+            <input type="text" name="bookName" class="form-control" placeholder="Search Book Name">
         </div>
         <div class="col">
             <select id="dropType" class="form-control">
                 <option value="" selected disabled>Select a Type</option>
-                @foreach (var item in Model.Types)
+                @foreach (var item in Model.Books)
                 {
-                    <option>@Html.DisplayFor(modelItem => item.Name)</option>
-                }
+<option>@Html.DisplayFor(modelItem => item.typeID)</option>}
             </select>
         </div>
         <div class="col">
@@ -22,19 +23,19 @@
                 <option value="" selected disabled>Select an Author</option>
                 @foreach (var item in Model.Authors)
                 {
-                    <option>@Html.DisplayFor(modelItem => item.Name)</option>
-                }
+<option>@Html.DisplayFor(modelItem => item.authorId)</option>}
             </select>
         </div>
         <div class="col">
-            @Html.ActionLink("Search", "SearchBookName", "Home", new { name = Html.Value("searchBookName") }, new { @class = "btn btn-primary" })
+            <input type="submit" name="Search" value="submit" />
+            <button type="submit" class="btn btn-success btn-block" name="Search">Search</button>
 
         </div>
         <div class="col">
             <button type="button" class="btn btn-danger btn-block">Clear</button>
         </div>
     </div>
-</form>
+</form>}
 
 <br />
 
@@ -58,10 +59,9 @@
             <td>@book.pageCount</td>
             <td>@book.Point</td>
             <td>
-                
             </td>
             <td>
-                @Html.ActionLink("View", "Borrows", "Home", new { bookId = book.BookID}, new { @class = "btn btn-primary" })
+                @Html.ActionLink("View", "Borrows", "Home", new { bookId = book.BookID }, new { @class = "btn btn-primary" })
 
             </td>
         </tr>

@@ -215,5 +215,46 @@ namespace u21600393_HW05.Models
             }
             return SBooks;
         }
+
+        public List<Books> searchBooks(string bookName)
+        {
+            using (SqlConnection con = new SqlConnection(ConnectionString))
+            {
+                List<Books> books = new List<Books>();
+                try
+                {
+                    con.Open();
+                    SqlCommand command = new SqlCommand("select " + "books.bookId, " + "books.name, " + "authors.surname, " + "types.name AS typename, " + "books.pagecount, " +
+                    "books.point " + "from books " + "Join authors " + "on books.authorId = authors.authorId " + "join types " + "on books.typeId = types.typeId where books.name like '"
+                    + bookName + "%';", con);
+                    SqlDataReader reader = command.ExecuteReader();
+                    while (reader.Read())
+                    {
+                        Books libraryBooks = new Books();
+
+                        libraryBooks.BookID = (int)reader["bookId"];
+                        libraryBooks.Name = (string)reader["name"];
+                        libraryBooks.AuthorID = (int)reader["authorId"];
+                        libraryBooks.typeID = (int)reader["typename"];
+                        libraryBooks.pageCount = (int)reader["pagecount"];
+                        libraryBooks.Point = (int)reader["point"];
+
+                        books.Add(libraryBooks);
+                    }
+                }
+                catch (Exception ex)
+                {
+
+                }
+                finally
+                {
+                    con.Close();
+                }
+                return books;
+
+
+            }
+        }
+        
     }
 }
