@@ -1,0 +1,30 @@
+﻿@model u21600393_HW05.Models.BooksVM
+
+
+<div class="h2">Books</div>
+
+<table class="table">
+    <tr>
+        <th>#</th>
+        <th>Name</th>
+        <th>Author</th>
+        <th>Type</th>
+        <th>Page Count</th>
+        <th>Points</th>
+    </tr>
+    @foreach (var book in Model.Books)
+    {
+        <tr>
+            <td>@book.BookID</td>
+            <td>@book.Name</td>
+            <td>@book.AuthorID</td>
+            <td>@book.typeID</td>
+            <td>@book.pageCount</td>
+            <td>@book.Point</td>
+            <td>
+                
+            </td>
+        </tr>
+    }
+</table>
+

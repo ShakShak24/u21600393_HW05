@@ -1,0 +1,63 @@
+﻿@model IEnumerable<u21600393_HW05.Models.Books>
+
+@{
+    ViewBag.Title = "Indexss";
+}
+
+<h2>Indexss</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.BookID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.pageCount)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Point)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.AuthorID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.typeID)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.BookID)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.pageCount)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Point)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.AuthorID)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.typeID)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+            @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+            @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+        </td>
+    </tr>
+}
+
+</table>
