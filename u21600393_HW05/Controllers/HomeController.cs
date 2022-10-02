@@ -22,12 +22,12 @@ namespace u21600393_HW05.Controllers
 
         }
 
-        [HttpPost]
-        public ActionResult searchBooks(string bookName)
-        {
-            List<Books> books = dataService.searchBooks(bookName);
-            return View("Index", books);
-        }
+        //[HttpPost]
+        //public ActionResult searchBooks(string bookName)
+        //{
+        //    List<Books> books = dataService.searchBooks(bookName);
+        //    return View("Index", books);
+        //}
 
         //public ActionResult SearchBookName(string book)
 

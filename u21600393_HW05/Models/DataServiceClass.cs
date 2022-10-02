@@ -185,76 +185,76 @@ namespace u21600393_HW05.Models
 
         //}
 
-        public List<Books> SearchByName(string name)
-        {
-            List<Books> SBooks = new List<Books>();
-            using (SqlConnection con = new SqlConnection(ConnectionString))
-            {
-                con.Open();
-                using (SqlCommand cmd = new SqlCommand("Select * from books where name like '%" + name + "%", con))
-                {
-                    using (SqlDataReader reader = cmd.ExecuteReader())
-                    {
-                        while (reader.Read())
-                        {
-                            Books sb = new Books
-                            {
-                                BookID = Convert.ToInt32(reader["bookId"]),
-                                Name = Convert.ToString(reader["name"]),
-                                pageCount = Convert.ToInt32(reader["pagecount"]),
-                                Point = Convert.ToInt32(reader["point"]),
-                                AuthorID = Convert.ToInt32(reader["authorId"]),
-                                typeID = Convert.ToInt32(reader["typeId"])
+        //public List<Books> SearchByName(string name)
+        //{
+        //    List<Books> SBooks = new List<Books>();
+        //    using (SqlConnection con = new SqlConnection(ConnectionString))
+        //    {
+        //        con.Open();
+        //        using (SqlCommand cmd = new SqlCommand("Select * from books where name like '%" + name + "%", con))
+        //        {
+        //            using (SqlDataReader reader = cmd.ExecuteReader())
+        //            {
+        //                while (reader.Read())
+        //                {
+        //                    Books sb = new Books
+        //                    {
+        //                        BookID = Convert.ToInt32(reader["bookId"]),
+        //                        Name = Convert.ToString(reader["name"]),
+        //                        pageCount = Convert.ToInt32(reader["pagecount"]),
+        //                        Point = Convert.ToInt32(reader["point"]),
+        //                        AuthorID = Convert.ToInt32(reader["authorId"]),
+        //                        typeID = Convert.ToInt32(reader["typeId"])
 
-                            };
-                            SBooks.Add(sb);
-                        }
-                    }
-                }
-                con.Close();
-            }
-            return SBooks;
-        }
+        //                    };
+        //                    SBooks.Add(sb);
+        //                }
+        //            }
+        //        }
+        //        con.Close();
+        //    }
+        //    return SBooks;
+        //}
 
-        public List<Books> searchBooks(string bookName)
-        {
-            using (SqlConnection con = new SqlConnection(ConnectionString))
-            {
-                List<Books> books = new List<Books>();
-                try
-                {
-                    con.Open();
-                    SqlCommand command = new SqlCommand("select " + "books.bookId, " + "books.name, " + "authors.surname, " + "types.name AS typename, " + "books.pagecount, " +
-                    "books.point " + "from books " + "Join authors " + "on books.authorId = authors.authorId " + "join types " + "on books.typeId = types.typeId where books.name like '"
-                    + bookName + "%';", con);
-                    SqlDataReader reader = command.ExecuteReader();
-                    while (reader.Read())
-                    {
-                        Books libraryBooks = new Books();
+        //public List<Books> searchBooks(string bookName)
+        //{
+        //    using (SqlConnection con = new SqlConnection(ConnectionString))
+        //    {
+        //        List<Books> books = new List<Books>();
+        //        try
+        //        {
+        //            con.Open();
+        //            SqlCommand command = new SqlCommand("select " + "books.bookId, " + "books.name, " + "authors.surname, " + "types.name AS typename, " + "books.pagecount, " +
+        //            "books.point " + "from books " + "Join authors " + "on books.authorId = authors.authorId " + "join types " + "on books.typeId = types.typeId where books.name like '"
+        //            + bookName + "%';", con);
+        //            SqlDataReader reader = command.ExecuteReader();
+        //            while (reader.Read())
+        //            {
+        //                Books libraryBooks = new Books();
 
-                        libraryBooks.BookID = (int)reader["bookId"];
-                        libraryBooks.Name = (string)reader["name"];
-                        libraryBooks.AuthorID = (int)reader["authorId"];
-                        libraryBooks.typeID = (int)reader["typename"];
-                        libraryBooks.pageCount = (int)reader["pagecount"];
-                        libraryBooks.Point = (int)reader["point"];
+        //                libraryBooks.BookID = (int)reader["bookId"];
+        //                libraryBooks.Name = (string)reader["name"];
+        //                libraryBooks.AuthorID = (int)reader["authorId"];
+        //                libraryBooks.typeID = (int)reader["typename"];
+        //                libraryBooks.pageCount = (int)reader["pagecount"];
+        //                libraryBooks.Point = (int)reader["point"];
 
-                        books.Add(libraryBooks);
-                    }
-                }
-                catch (Exception ex)
-                {
+        //                books.Add(libraryBooks);
+        //            }
+        //        }
+        //        catch (Exception ex)
+        //        {
 
-                }
-                finally
-                {
-                    con.Close();
-                }
-                return books;
+        //        }
+        //        finally
+        //        {
+        //            con.Close();
+        //        }
+        //        return books;
 
 
-            }
-        }
+        //    }
+        
         
     }
 }
