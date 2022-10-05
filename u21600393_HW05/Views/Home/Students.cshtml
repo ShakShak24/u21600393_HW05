@@ -6,29 +6,26 @@
 
 <h2>Students</h2>
 
-<form>
-    <div class="form-row">
-        <div class="col">
-            <input type="search" id="searchStudentName" class="form-control" placeholder="Search Student Name">
-        </div>
-        <div class="col">
-            <select id="dropType" class="form-control">
-                <option value="" selected disabled>Select a class</option>
-                @foreach (var item in Model)
-                {
-                    <option>@Html.DisplayFor(modelItem => item.Class)</option>
-                }
-            </select>
-        </div>
-        <div class="col">
-            <button type="button" class="btn btn-success btn-block">Search</button>
+@using (Html.BeginForm("studentsearch", "Home", FormMethod.Post))
+{
 
-        </div>
-        <div class="col">
-            <button type="button" class="btn btn-danger btn-block">Clear</button>
-        </div>
+    <div>
+        <input type="text" id="name" name="name" placeholder="Search name" />
     </div>
-</form>
+    <div>
+        <select name="cla" id="cla">
+            <option value="" disabled selected>Select class</option>
+            @foreach (var cla in Model)
+            {
+                <option>@cla.Class</option>
+            }
+        </select>
+    </div>
+    <div class="col-lg-2 col-md-6">
+        <input type="submit" class="btn btn-success" value="Search" name="search" />
+    </div>
+    @Html.ActionLink("Clear", "clearStudents", "Home", new { @class = "btn btn-danger" })
+}
 
 <br />
 
@@ -43,7 +40,7 @@
         <th>
             @Html.DisplayNameFor(model => model.Surname)
         </th>
-      
+
         <th>
             @Html.DisplayNameFor(model => model.Class)
         </th>
@@ -53,29 +50,30 @@
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.StudentID)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Name)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Surname)
-        </td>
-        
-        <td>
-            @Html.DisplayFor(modelItem => item.Class)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Point)
-        </td>
-        <td>
-            @Html.ActionLink("Borrow Book", "Edit", new { @class = "btn btn-primary" }) |
-            
-        </td>
-    </tr>
-}
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.StudentID)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Surname)
+            </td>
+
+            <td>
+                @Html.DisplayFor(modelItem => item.Class)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Point)
+            </td>
+            <td>
+                @Html.ActionLink("Borrow Book", "Edit", new { @class = "btn btn-primary" }) |
+
+            </td>
+        </tr>
+    }
 
 </table>

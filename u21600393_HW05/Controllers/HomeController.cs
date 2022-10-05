@@ -19,7 +19,7 @@ namespace u21600393_HW05.Controllers
         }
 
         [HttpPost]
-        public ActionResult searchbooks(string bookname, string authorname, string typename)
+        public ActionResult booksearch(string bookname, string authorname, string typename)
         {
             List<Books> books = dataService.searchbooks(bookname, authorname, typename);
             return View("Index", books);
@@ -43,14 +43,22 @@ namespace u21600393_HW05.Controllers
         public ActionResult Students()
         {
             List<Students> students = dataService.GetStudents();
-
-
             return View(students);
         }
 
+        [HttpPost]
+        public ActionResult studentsearch(string name, string cla)
+        {
+            List<Students> stu = dataService.SearchStudents(name, cla);
+            return View("Students", stu);
+        }
 
-        
-        
+        public ActionResult clearStudents()
+        {
+            return RedirectToAction("Students");
+        }
+
+
 
     }
 }

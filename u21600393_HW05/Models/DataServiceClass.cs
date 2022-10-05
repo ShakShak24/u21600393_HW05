@@ -187,15 +187,15 @@ namespace u21600393_HW05.Models
                     SqlDataReader reader = command.ExecuteReader();
                     while (reader.Read())
                     {
-                        Books data = new Books();
-                        data.BookID = (int)reader["bookId"];
-                        data.Name = (string)reader["name"];
-                        data.Author = Convert.ToString(reader["surname"]);
-                        data.Type = Convert.ToString(reader["typename"]);
-                        data.PageCount = (int)reader["pagecount"];
-                        data.Point = (int)reader["point"];
+                        Books search = new Books();
+                        search.BookID = (int)reader["bookId"];
+                        search.Name = (string)reader["name"];
+                        search.Author = Convert.ToString(reader["surname"]);
+                        search.Type = Convert.ToString(reader["typename"]);
+                        search.PageCount = (int)reader["pagecount"];
+                        search.Point = (int)reader["point"];
 
-                        books.Add(data);
+                        books.Add(search);
                     }
                 }
                 catch (Exception ex)
@@ -210,6 +210,37 @@ namespace u21600393_HW05.Models
 
             }
         }
+        public List<Students> SearchStudents(string name, string cla)
+        {
+            List<Students> Student = new List<Students>();
+            using (SqlConnection con = new SqlConnection(ConnectionString))
+            {
+                con.Open();
+                using (SqlCommand cmd = new SqlCommand("Select * from students where students.name like '"
+                    + name + "%'" + "and students.class like '" + cla + "%'", con))
+                {
+                    using (SqlDataReader reader = cmd.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            Students stu = new Students
+                            {
+                                StudentID = Convert.ToInt32(reader["studentId"]),
+                                Name = Convert.ToString(reader["name"]),
+                                Surname = Convert.ToString(reader["surname"]),
+                                Class = Convert.ToString(reader["class"]),
+                                Point = Convert.ToInt32(reader["point"])
 
-    }
+
+                            };
+                            Student.Add(stu);
+                        }
+                    }
+                }
+                con.Close();
+            }
+            return Student;
+        }
+
+    }   
 }
