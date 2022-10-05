@@ -9,10 +9,10 @@ namespace u21600393_HW05.Models
     {
         public int BookID { get; set; }
         public String Name { get; set; }
-        public int pageCount { get; set; }
+        public int PageCount { get; set; }
         public int Point { get; set; }
-        public int AuthorID { get; set; }
-        public int typeID { get; set; }
+        public String Author { get; set; }
+        public String Type { get; set; }
         
     }
 }

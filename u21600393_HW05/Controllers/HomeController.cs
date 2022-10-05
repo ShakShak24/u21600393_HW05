@@ -13,23 +13,24 @@ namespace u21600393_HW05.Controllers
         private DataServiceClass dataService = DataServiceClass.getInstance();
         public ActionResult Index()
         {
-            BooksVM bookR = new BooksVM();
-            bookR.Authors = dataService.GetAuthors();
-            bookR.Books = dataService.GetBooks();
-            bookR.Types = dataService.GetTypes();
-
+            List<Books> bookR = dataService.GetBooks();
             return View(bookR);
 
         }
 
-        //[HttpPost]
-        //public ActionResult searchBooks(string bookName)
-        //{
-        //    List<Books> books = dataService.searchBooks(bookName);
-        //    return View("Index", books);
-        //}
+        [HttpPost]
+        public ActionResult searchbooks(string bookname, string authorname, string typename)
+        {
+            List<Books> books = dataService.searchbooks(bookname, authorname, typename);
+            return View("Index", books);
+        }
 
-        //public ActionResult SearchBookName(string book)
+        public ActionResult clearIndex()
+        {
+            return RedirectToAction("Index");
+        }
+
+        
 
         public ActionResult Borrows(int bookId)
         {
@@ -37,11 +38,7 @@ namespace u21600393_HW05.Controllers
             return View(borrows);
         }
 
-        //public ActionResult getCount(int bookId)
-        //{
-        //    List<Borrowed> count = dataService.getCount(bookId);
-        //    return RedirectToAction("Borrows");
-        //}
+        
 
         public ActionResult Students()
         {
@@ -51,6 +48,8 @@ namespace u21600393_HW05.Controllers
             return View(students);
         }
 
+
+        
         
 
     }

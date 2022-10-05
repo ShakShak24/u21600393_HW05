@@ -1,41 +1,38 @@
-﻿@model u21600393_HW05.Models.BooksVM
+﻿@model IEnumerable<u21600393_HW05.Models.Books>
+
 
 
 <div class="h2">Books</div>
 
-@using (Html.BeginForm("searchBooks", "Home", FormMethod.Post))
+@using (Html.BeginForm("searchbooks", "Home", FormMethod.Post))
 {
-<form>
-    <div class="form-row">
-        <div class="col">
-            <input type="text" name="bookName" class="form-control" placeholder="Search Book Name">
+    
+        <div>
+            <input type="text" id="bookname" name="bookname" placeholder="Search book" />
         </div>
-        <div class="col">
-            <select id="dropType" class="form-control">
-                <option value="" selected disabled>Select a Type</option>
-                @foreach (var item in Model.Books)
+        <div>
+            <select name="authorname" id="authorname" >
+                <option value="" disabled selected>Select author</option>
+                @foreach (var author in Model)
                 {
-<option>@Html.DisplayFor(modelItem => item.typeID)</option>}
+                    <option>@author.Author</option>
+                }
             </select>
         </div>
-        <div class="col">
-            <select id="dropAuthor" class="form-control">
-                <option value="" selected disabled>Select an Author</option>
-                @foreach (var item in Model.Authors)
+        <div>
+            <select name="typename" id="typename">
+                <option value="" disabled selected>Select type</option>
+                @foreach (var type in Model)
                 {
-<option>@Html.DisplayFor(modelItem => item.authorId)</option>}
+                <option>@type.Type</option>
+                }
             </select>
         </div>
-        <div class="col">
-            
-            <button type="submit" class="btn btn-success btn-block" name="Search">Search</button>
-
+        <div class="col-lg-2 col-md-6">
+            <input type="submit" class="btn btn-success" value="Search" name="search" />
         </div>
-        <div class="col">
-            <button type="button" class="btn btn-danger btn-block">Clear</button>
-        </div>
-    </div>
-</form>}
+        @Html.ActionLink("Clear", "clearIndex", "Home", new { @class = "btn btn-danger" })
+}
 
 <br />
 
@@ -49,20 +46,20 @@
         <th>Points</th>
         <th>Status</th>
     </tr>
-    @foreach (var book in Model.Books)
+    @foreach (var books in Model)
     {
         <tr>
-            <td>@book.BookID</td>
-            <td>@book.Name</td>
-            <td>@book.AuthorID</td>
-            <td>@book.typeID</td>
-            <td>@book.pageCount</td>
-            <td>@book.Point</td>
+            <td>@books.BookID</td>
+            <td>@books.Name</td>
+            <td>@books.Author</td>
+            <td>@books.Type</td>
+            <td>@books.PageCount</td>
+            <td>@books.Point</td>
             <td>
                 Available
             </td>
             <td>
-                @Html.ActionLink("View", "Borrows", "Home", new { bookId = book.BookID }, new { @class = "btn btn-primary" })
+                @Html.ActionLink("View", "Borrows", "Home", new { bookId = books.BookID }, new { @class = "btn btn-primary" })
 
             </td>
         </tr>
